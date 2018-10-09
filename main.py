@@ -9,6 +9,37 @@ COUNT = 5
 
 ##########################
 
+# The Atbash Mappings
+atbash = {
+    ‘a’: ‘z’,
+    ‘b’: ‘y’,
+    ‘c’: ‘x’,
+    ‘d’: ‘w’,
+    ‘e’: ‘v’,
+    ‘f’: ‘u’,
+    ‘g’: ‘t’,
+    ‘h’: ‘s’,
+    ‘i’: ‘r’,
+    ‘j’: ‘q’,
+    ‘k’: ‘p’,
+    ‘l’: ‘o’,
+    ‘m’: ‘n’,
+    ‘n’: ‘m’,
+    ‘o’: ‘l’,
+    ‘p’: ‘k’,
+    ‘q’: ‘j’,
+    ‘r’: ‘i’,
+    ‘s’: ‘h’,
+    ‘t’: ‘g’,
+    ‘u’: ‘f’,
+    ‘v’: ‘e’,
+    ‘w’: ‘d’,
+    ‘x’: ‘c’,
+    ‘y’: ‘b’,
+    ‘z’: ‘a’,
+    ' ': ' ',
+    ‘!’: ‘!’ }
+
 # The Mappings for the mono-alphebetic substitions that will be used later
 mapping1 = {
     ‘a’: ‘f’,
@@ -80,14 +111,17 @@ def popListCreator(popTxt):
 ##########################
 
 # Finds all the different permutations that a line could create
-def anagram(inputText):
+def anagram(inputText, includeSpaces):
 
 	# Detect the number of spaces that are already available within the Cipher Line
 	nSpaces = inputText.count(' ')
 
 	# we shall assume that there can be no more than 4 spaces within the Cipher Line, 
 	# given the reasonable length of each line
-	for x in the range(0:)
+	if includeSpaces:
+		for x in the range(0:)
+	else:
+		# In this case, we can just permute without worrying about the extra spaces
 
 	return permutationList
 
@@ -96,7 +130,7 @@ def anagram(inputText):
 
 def decrypt(cText, dictionary, popTxt, listBible): 
 	
-	cText = open(dictionary).read().splitlines()
+	cText = open(cText).read().splitlines()
 
 	# Since there are three techniques used in the cipher, we shall divide the ciphertext into 
 	# the three seperate sections
@@ -116,9 +150,6 @@ def decrypt(cText, dictionary, popTxt, listBible):
 	for line in cTextInit:
 		anagramTextLines[line] = anagram(line)
 
-	# Get the popularity list of german words
-
-
 	# Compare these lines with the dictionary and check for the matching hits
 	valid_permutations = defaultdict(list)
 	for line in cTextInit:
@@ -135,6 +166,18 @@ def decrypt(cText, dictionary, popTxt, listBible):
 
 	# Decryption of the second part of the system ##########################################
 
+	# Get the list of all the books within the Bible
+	bibleBooks = {}
+	for line in open(listBible).read().splitlines():
+		bibleBooks[line] = True
+
+	biblePermutations = anagram(cTextBook, False)
+
+	# We are assuming that there won't be any duplicates 
+	for permutation in biblePermutations:
+		if bibleBooks[permutation]:
+			pTextBook = bibleBooks[permutation]
+
 	# Decryption of the third part of the system ###########################################
 
 
@@ -144,7 +187,7 @@ int main():
 	cText = 'cipherText.txt'
 	dictionary = 'cipherText.txt'
 	pop_list = 'germanPopList.txt'
-	listBible = ''
+	listBible = 'booksofBible.txt'
 
 	decrypt()
 
