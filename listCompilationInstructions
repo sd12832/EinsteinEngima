@@ -2,3 +2,5 @@ Using this list here
 			https://docs.google.com/spreadsheets/d/1yXa3csu4aYyvdIpyKL04KBkly3XXo9odKKdU7BLcwsQ/edit#gid=0
 using the command 
 			=join(", ", G3:G2285)
+How we got the dictionary
+	https://sourceforge.net/projects/germandict/files/
